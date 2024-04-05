@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Entry Options</h5>
+                    <p class="card-text">Click on the buttons below to navigate to different entry options.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="@Url.Action("GetAllVendor","Vendor")" class="btn btn-primary btn-block">Go to Vendor Entry</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="@Url.Action("Index","MaterialEntry")" class="btn btn-primary btn-block">Go to Material Entry</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="@Url.Action("Index","Poheader")" class="btn btn-primary btn-block">Go to PO Entry</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

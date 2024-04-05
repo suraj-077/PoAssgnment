@@ -1,0 +1,321 @@
+﻿@model Po_Assignment.Models.Po_Details
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "partialformid" }))
+{
+    <div class="container ">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row" > 
+            <div class="col-sm-4 ">
+                <label for="MaterialEntryId" class="control-label-col-sm-2">Material<span style="color:red">*</span> </label>
+                @Html.DropDownListFor(model => model.MaterialEntryId, (SelectList)ViewBag.Materials, "Select Material", new { @class = "form-control", id = "materialDropdown", required = "required" })               
+                @Html.ValidationMessageFor(model => model.MaterialEntryId, "", new { @class = "text-danger" })               
+            </div>
+            <div class="col-sm-4 ">
+                <label for="shortText" class="control-label">Short Text</label>
+                <input type="text" id="shortText" class="form-control" readonly />
+            </div>
+
+            <div class="col-sm-4 ">
+                <label for="unit" class="control-label col-md-2">Unit</label>
+                <input type="text" id="unit" class="form-control" readonly />
+            </div>                        
+        </div>
+
+        &nbsp;
+        <div class="form-group row ">
+            <label for="ItemQuantity" class="control-label col-md-2">Quantity<span style="color:red">*</span></label>
+            <div class="col-sm-4">
+                <input type="number" id="ItemQuantity" name="ItemQuantity" class="form-control" min="1" step="1" required>
+                @Html.ValidationMessageFor(model => model.ItemQuantity, "", new { @class = "text-danger" })
+            </div>
+            <label for="ItemRate" class="control-label col-md-2">Rate<span style="color:red">*</span></label>
+            <div class="col-sm-4">
+                <input type="number" id="ItemRate" name="ItemRate" class="form-control" min="1" step="1" required>
+                @Html.ValidationMessageFor(model => model.ItemRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+      
+       
+        &nbsp;
+        <div class="form-group row">
+            <label for="ItemValue" class="control-label col-md-2">Amount</label>
+            <div class="col-sm-4">
+                @Html.EditorFor(model => model.ItemValue, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @min = DateTime.Now.ToString("yyyy-MM-dd") } })                
+                @Html.ValidationMessageFor(model => model.ItemValue, "", new { @class = "text-danger" })
+            </div>
+            <label for="ExpectedDate" class="control-label col-md-2">Expected Date
+                <span style="color:red">*</span>
+            </label>
+            <div class="col-sm-4">  
+                <input asp-for="ExpectedDate" id="expecteddate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+            </div>
+        </div>
+
+
+        &nbsp;
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="addLineBtn" type="button" class="btn btn-success">Add Line</button>
+                <button Id="updateLineBtn" type="button" class="btn btn-warning">Update Line</button>
+                <button id="removeLineBtn" type="button" class="btn btn-danger">Remove Line</button>
+            </div>
+        </div>
+
+        &nbsp;
+        <h4>Order Items</h4>
+        <table id="orderItemsTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Select</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Rate</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Expected Date</th>                 
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>  
+    </div>
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="~/css/selected.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+
+          
+        @*
+        $('#orderItemsTable').closest('form').on('click', function (event) {
+            var target = $(event.target);
+
+            // Check if the clicked element is not within a table row
+            if (!target.closest('tr').length) {
+                // Remove 'selected' class from all rows
+                $('#orderItemsTable tbody tr').removeClass('selected');
+                $('#materialDropdown, #shortText, #unit, #ItemQuantity, #ItemRate, #ItemValue, #expecteddate').val('');
+
+            }
+        });
+        *@
+        
+
+
+        $('#materialDropdown').change(function () {
+            var materialId = $(this).val();
+            $.ajax({
+                url: '/PoDetails/GetMaterialDetails',
+                type: 'GET',
+                data: { materialId: materialId },
+                success: function (result) {
+                    $('#shortText').val(result.shortText);
+                    $('#unit').val(result.unit);
+                },
+                error: function () {
+                    alert('Error occurred while fetching material details.');
+                }
+            });
+        });
+
+
+        $(' #ItemQuantity, #ItemRate').change(function () {
+            var quantity = parseInt($('#ItemQuantity').val());
+            var rate = parseInt($('#ItemRate').val());
+            if (quantity > 0 && rate > 0) {
+                var amount = quantity * rate;
+                $('#ItemValue').val(amount.toFixed(2));
+            } else {
+                $('#ItemValue').val('');
+            }
+        });
+
+       
+        $('#addLineBtn').click(function () {
+            var selectedRowCount = $('#orderItemsTable tbody tr.selected').length;
+
+            if (selectedRowCount === 1) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Invalid operation:',
+                    icon: 'error'
+                });
+                return;
+            }
+
+         
+
+           
+            var material = $('#materialDropdown').val();
+            var shortText = $('#shortText').val();
+            var unit = $('#unit').val();
+            var quantity = $('#ItemQuantity').val();
+            var rate = $('#ItemRate').val();
+            var amount = $('#ItemValue').val();
+            var expectedDate = $('#expecteddate').val();
+
+            
+
+            if (!material || !shortText || !unit || !quantity || !rate || !amount || !expectedDate) {
+               // alert("Please fill in all fields.");
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No please fill in all fields',
+                    icon: 'error'
+                });
+                return;
+            }  
+
+            var newRow = '<tr><td>' + material + '</td><td>' + shortText + '</td><td>' + unit + '</td><td>' + quantity + '</td><td>' + rate + '</td><td>' + amount + '</td><td>' + expectedDate + '</td></tr>';
+            $('tbody').append(newRow);
+
+
+            var orderValue = calculateOrderValue();
+            $('#orderValue').val(orderValue.toFixed(2));
+
+            $('#materialDropdown, #shortText, #unit, #ItemQuantity, #ItemRate, #ItemValue, #expecteddate').val('');
+        });
+
+            
+        $('#removeLineBtn').click(function () {
+           
+            var selectedRow = $('#orderItemsTable tbody tr.selected');
+
+            if (selectedRow.length > 0) {
+                selectedRow.remove(); 
+
+                if ($('#orderItemsTable tbody tr').length === 0)
+                {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Entry removed',
+                        icon: 'success'
+                       
+                    })
+                    var orderValue = calculateOrderValue();
+                    $('#orderValue').val(orderValue.toFixed(2));
+                    location.reload();
+                }                  
+                else
+                {                  
+                    var orderValue = calculateOrderValue();
+                    $('#orderValue').val(orderValue.toFixed(2));
+                }
+                
+                var orderValue = calculateOrderValue();
+                $('#orderValue').val(orderValue.toFixed(2));
+
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Order removed',
+                    icon: 'success'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No Order selected to remove',
+                    icon: 'error'
+                });
+            }
+
+            
+        });
+
+   
+         var prevData = ""; // Variable to store previous form data
+        
+        $('#orderItemsTable tbody').on('click', 'tr', function () {
+            // Remove 'selected' class from other rows and add it to the clicked row
+            $(this).addClass('selected').siblings().removeClass('selected');
+    
+            // Extract data from selected row and populate input fields
+            var selectedRow = $(this)
+            $('#materialDropdown').val(selectedRow.find('td:nth-child(1)').text());
+            $('#shortText').val(selectedRow.find('td:nth-child(2)').text());
+            $('#unit').val(selectedRow.find('td:nth-child(3)').text());
+            $('#ItemQuantity').val(selectedRow.find('td:nth-child(4)').text());
+            $('#ItemRate').val(selectedRow.find('td:nth-child(5)').text().replace('$', ''));
+            $('#ItemValue').val(selectedRow.find('td:nth-child(6)').text().replace('$', ''));
+            $('#expecteddate').val(selectedRow.find('td:nth-child(7)').text());
+           
+
+            // Serialize form data for comparison
+            debugger;
+            prevData = $('#poForm').serialize();         
+            
+          });
+
+        $('#updateLineBtn').click(function () {
+            
+              if ($('#orderItemsTable tbody tr.selected').length > 0)
+              {
+                var currentData = $('#poForm').serialize();
+                  
+    
+            // Compare current form data with previous data
+                if (currentData !== prevData) {
+                  // If changes occurred, update the corresponding row in the table
+                      var selectedRow = $('#orderItemsTable tbody .selected');
+                      selectedRow.find('td:nth-child(1)').text($('#materialDropdown').val());
+                      selectedRow.find('td:nth-child(2)').text($('#shortText').val());
+                       selectedRow.find('td:nth-child(3)').text($('#unit').val());
+                      selectedRow.find('td:nth-child(4)').text($('#ItemQuantity').val());
+                      selectedRow.find('td:nth-child(5)').text($('#ItemRate').val());
+                      selectedRow.find('td:nth-child(6)').text($('#ItemValue').val());
+                      selectedRow.find('td:nth-child(7)').text($('#expecteddate').val());
+
+                      // Update prevData with currentData
+                    
+                      prevData = currentData;
+
+                      // Provide feedback to the user
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Data updated successfully!',
+                        icon: 'warning'
+                    });
+                        $('#materialDropdown, #shortText, #unit, #ItemQuantity, #ItemRate, #ItemValue, #expecteddate').val('');
+                        $('#orderItemsTable tbody tr').removeClass('selected');
+
+                        }
+                        else {
+                      // If no changes occurred, display a message
+                        Swal.fire({
+                            title: 'Warning!',
+                            text: 'No changes occured data not updated!',
+                            icon: 'warning'
+                        });
+                     
+                        }
+              }
+              else
+              {
+                Swal.fire({
+                    title: 'Warning!',
+                    text: 'please select any row',
+                    icon: 'warning'
+                });
+              }
+         
+          });
+
+    });
+
+    function calculateOrderValue() {
+        var total = 0;
+        $('tbody tr').each(function () {
+            var amount = parseFloat($(this).find('td:nth-child(5)').text());
+            if (!isNaN(amount)) {
+                total += amount;
+            }
+        });
+        return total;
+    }
+
+</script>
+
+    
+

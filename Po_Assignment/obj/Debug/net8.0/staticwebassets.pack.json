@@ -1,0 +1,137 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Po_Assignment.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Po_Assignment.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\css\\selected.css",
+      "PackagePath": "staticwebassets\\css\\selected.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\js\\Updaterow.js",
+      "PackagePath": "staticwebassets\\js\\Updaterow.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\.bower.json",
+      "PackagePath": "staticwebassets\\pnotify\\.bower.json"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\.gitignore",
+      "PackagePath": "staticwebassets\\pnotify\\.gitignore"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\README.md",
+      "PackagePath": "staticwebassets\\pnotify\\README.md"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\bower.json",
+      "PackagePath": "staticwebassets\\pnotify\\bower.json"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.animate.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.animate.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.brighttheme.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.brighttheme.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.buttons.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.buttons.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.buttons.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.buttons.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.callbacks.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.callbacks.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.confirm.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.confirm.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.desktop.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.desktop.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.history.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.history.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.history.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.history.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.material.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.material.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.mobile.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.mobile.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.mobile.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.mobile.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.nonblock.css",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.nonblock.css"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.nonblock.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.nonblock.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.reference.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.reference.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\dist\\pnotify.tooltip.js",
+      "PackagePath": "staticwebassets\\pnotify\\dist\\pnotify.tooltip.js"
+    },
+    {
+      "Id": "D:\\Project_Data\\AITS\\Suraj hirmukhe\\Po_Assignment\\Po_Assignment\\Po_Assignment\\Po_Assignment\\wwwroot\\pnotify\\libtests\\browserify\\index.js",
+      "PackagePath": "staticwebassets\\pnotify\\libtests\\browserify\\index.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Po_Assignment.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Po_Assignment.props",
+      "PackagePath": "build\\Po_Assignment.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Po_Assignment.props",
+      "PackagePath": "buildMultiTargeting\\Po_Assignment.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Po_Assignment.props",
+      "PackagePath": "buildTransitive\\Po_Assignment.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

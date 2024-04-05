@@ -1,0 +1,7 @@
+﻿body {
+}
+
+.selected {
+    background-color: palegreen; /* Change to any color you want for selected rows */
+    color: #000; /* Change text color as needed */
+}

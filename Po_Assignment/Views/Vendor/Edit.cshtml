@@ -1,0 +1,286 @@
+﻿@model Po_Assignment.Models.VendorMaster
+
+@{
+    ViewData["Title"] = "Edit Vendor";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Vendor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="mb-0">Edit Vendor</h5>
+                        <div>
+                            <button id="saveButton" class="btn btn-primary">Save</button>
+                            <a asp-action="GetAllVendor" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form id="vendorForm" asp-action="AddVendor" method="post" class="form-horizontal">
+                        <div asp-validation-summary="ModelOnly" class="text-d   anger"></div>
+                        <!-- Form fields -->                      
+                            <!-- Hidden input field for ID -->
+
+                        <input type="hidden" asp-for="ContactNo" />
+                        <input type="hidden" asp-for="ContactEmail"/>
+
+                        <div class="form-group row">
+                            <label asp-for="Code" class="col-sm-3 "></label>
+                            <div class="col-sm-4">
+                                <input asp-for="Code" id="code" class="form-control" readonly />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-sm-3 col-form-label">
+                                Name
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="Name" class="form-control" id="CheckName" oninput="validateName(this)" required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <span id="nameError" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="AddressLine1" class="col-sm-3 col-form-label">
+                                Address Line 1
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="AddressLine1" id="address" oninput="validateAddress(this,'addressLine1Error')" class="form-control" required />
+                                <span id="addressLine1Error" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="AddressLine2" class="col-sm-3 col-form-label">
+                                Address Line 2
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="AddressLine2" id="address2" oninput="validateAddress(this,'addressLine2Error')" class="form-control" required />
+                                <span id="addressLine2Error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="ContactEmail" class="col-sm-3 col-form-label">
+                                Contact Email
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="ContactEmail" class="form-control" disabled oninput="ValidateEmail(this)" required />
+                                <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                <span id="emailError" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="ContactNo" class="col-sm-3 col-form-label">
+                                Contact No
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-4">
+                                <input asp-for="ContactNo" class="form-control" id="ContactNo" disabled type="text" oninput="validateNo(this)" required />
+                                <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                <span id="ContactNoError" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="ValidTillDate" class="col-sm-3 col-form-label">
+                                Valid Till Date
+                                <span style="color:red">*</span>
+                            </label>
+                            <div class="col-sm-4">
+                                <input asp-for="ValidTillDate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                                <span asp-validation-for="ValidTillDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-4 d-flex justify-content-end">
+                                <div class="form-check">
+                                    <input class="form-check-input"  checked asp-for="IsActive" required />
+                                    <label class="form-check-label" asp-for="IsActive"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/validation.js"></script>
+
+</body>
+</html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        var isnovalid = true;
+        var addressvalid = true;
+        var isnamevalid = true;
+
+
+        var originalFormData;
+        window.onload = function ()
+        {
+            originalFormData = $("#vendorForm").serialize();
+        }
+
+       
+        function validateNo(input) {
+            var contactNo = input.value.trim();
+            const regex = /^\d{0,10}$/;
+
+            var errorMessageSpan = document.getElementById("ContactNoError");
+
+            if (!regex.test(contactNo)) {
+
+                errorMessageSpan.innerText = "Please enter valid number";
+                errorMessageSpan.style.display = 'inline';
+                isnovalid = false;
+            } else {
+
+                errorMessageSpan.style.display = 'none';
+                isnovalid = true;
+            }
+        }
+        function validateAddress(input, fieldName) {
+
+            var address = input.value.trim();
+            const regex = /^[a-zA-Z0-9\s,.'#/-]*$/;
+            var errorMessageSpan = document.getElementById(fieldName);
+
+            if (!regex.test(address)) {
+
+                errorMessageSpan.innerText = "Please enter a valid address.";
+                errorMessageSpan.style.display = 'inline';
+                addressvalid = false;
+            } else {
+
+                errorMessageSpan.style.display = 'none';
+                addressvalid = true;
+            }
+        }
+
+        function validateName(input) {
+            var name = input.value.trim();
+
+            var errorMessageSpan = document.getElementById("nameError");
+
+            // Regular expression to allow only letters
+            var regex = /^[a-zA-Z\s]*$/;
+
+            if (name == " ") {
+                errorMessageSpan.innerText = "this field is reqired";
+                isnamevalid = false
+                return false
+
+            }
+
+            else if (name.length > 20) {
+                errorMessageSpan.innerText = "please input name less than 50 characters";
+                isnamevalid = false
+                return false;
+
+            }
+            else if (!regex.test(name)) {
+                errorMessageSpan.innerText = "Please enter only letters.";
+                errorMessageSpan.style.display = 'inline';
+                isnamevalid=false
+
+            } else {
+                errorMessageSpan.style.display = 'none';
+                isnamevalid=true
+            }
+        }
+
+
+
+
+
+
+        $("#saveButton").click(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+           
+
+            $("#ContactNo").prop("disabled", false);
+            $("#ContactEmail").prop("disabled", false);
+            // Serialize the current form data
+            var currentFormData = $("#vendorForm").serialize();
+
+            // Compare the serialized form data with the original form data
+            if (currentFormData === originalFormData) {
+                alert("No changes made.");
+                return;
+            }
+
+            var formValid = true;
+            $("#vendorForm input[type='text'],input[type='email'],input[type='number'],input[type='date'], #vendorForm textarea").each(function () {
+                if ($(this).val().trim() === "") {
+                    formValid = false;
+                    return false;
+                }
+            });
+
+            if (!formValid) {
+                alert("Please fill out all required fields.");
+                return; // Exit the function
+            }
+
+            var contactNo = $("#ContactNo").val().trim();
+            const regex = /^\d{10}$/;
+
+            if (contactNo === '' || !regex.test(contactNo)) {
+                alert("Please enter a valid contact number.");
+                return;
+            }
+            var formData = $("#vendorForm").serialize();
+          
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Edit", "Vendor")",
+                data: formData,
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Vendor details updated Successfully',
+                        showConfirmButton: false,
+                        timer: 2000 // Close the alert after 3 seconds
+                    }).then(function () {
+                        // Redirect to the index page or perform any other action
+                        window.location.href = '/Vendor/GetAllVendor';
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+
+        });
+    </script>
+}
